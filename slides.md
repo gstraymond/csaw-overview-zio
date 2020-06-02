@@ -3,15 +3,21 @@
 -> ## Agenda <-
 
 • Functional effects
-• Scala Type Parameterization
-• ZIO API
-• Fibers, Streams, Brackets...
+
+• Scala Type Parametrization
+
+• ZIO toy implementation
+
+• ZIO async
+
+• cool tricks with ZIO
 
 ---
 
 -> ## Future[A] <-
 
 • Not referentially transparent
+
 • Limited
 
 TO BE COMPLETED
@@ -22,9 +28,14 @@ TO BE COMPLETED
 -> ## Functional effects <-
 
 • Modeling side-effects with pure/immutable values
+
 • FE describe a program instead of running it
-• Problems with side-effects: type reasoning, composition, testing
-• program description will be executed by an interpreter
+
+• Problems with side-effects
+  type reasoning, composition, testing
+  
+• program description will be executed
+  by an interpreter
 
 ---
 
@@ -33,7 +44,9 @@ TO BE COMPLETED
 *Console*
 
 • `Print(line: String)`
+
 • `Sequence(first:Console, second: Console)`
+
 • Interpreter
 
 ---
@@ -43,34 +56,61 @@ TO BE COMPLETED
 *Console[A]*
 
 • `Return(value: A)`
-• `Print(line: String, console: Console[A])
+
+• `Print(line: String, console: Candonsole[A])
+
 • `Read(f: String => Console[A])`
+
 • Interpreter
 
 ---
 
-Scala Type Parameterization
+-> ## Type Parametrization: variance / bound <-
 
-• Covariance: `List[+A]`
-• Contravariance: `Queue[-A]`
+*Covariance*
 
-TO BE COMPLETED
-=================
+• `List[+A]` - A is covariant
+  can accept T and all sub-types
+
+*Lower Type Bound*
+
+• `B >: A` - A subtype of B
+
+`+A` will make type *more* generic: `A1 || A2 || A3`...
+
+---
+
+-> ## Type Parametrization: variance / bound <-
+
+*Contravariance*
+
+• `Module[-A]` - A is contravariant
+  can accept T and all super-types
+
+*Upper Type Bound*
+
+• `B <: A` - B subtype of A
+
+`-A` will make type *less* generic: `A1 && A2 && A3`...
 
 --- 
 
--> ZIO[-R, +E, +A] <-
+-> ## ZIO[-R, +E, +A] <-
 
-• R: environment
-• E: error
-• A: result
+• `R` environment
+
+• `E` error
+
+• `A` result
 
 ---
 
 -> ## Building a simple ZIO <-
 
 • constructors
+
 • operators
+
 • sample program
 
 ---
@@ -91,70 +131,89 @@ Can represent
 
 -> ## ZIO async: fibers <-
 
-on top of JVM threads (mapped on OS threads)
+• on top of JVM threads (mapped on OS threads)
 
-sort of green threads
+• ~ green threads
 
-each fiber has its own stack and interpreter, to be able to run effects
+• each fiber has its own stack and interpreter
+  to be able to run effects
+  
+• able to run a lot of fibers on a single thread
 
-able to run a lot of fibers on a single thread
-
-improve scalability
+• improve scalability
 
 ---
 
--> ## Magic tricks <-
+-> ## Cool tricks <-
 
 *Fallback*
 
 • composing effects
-• `getFromAll` cannot fail since `getFromConfig` cannot fail
+
+• `getFromAll` cannot fail
+  since `getFromConfig` cannot fail
 
 ---
 
--> ## Magic tricks <-
+-> ## Cool tricks <-
 
 *Forever*
 
-• is an effects combinator: take effects and return effects
+• is an effects combinator
+  take effects and return effects
+  
 • can fail but can't succeed (doesn't terminate)
 
 ---
 
--> ## Magic tricks <-
+-> ## Cool tricks <-
 
 *Eventually*
 
-• is an effects combinator: take effects and return effects
+• is an effects combinator
+  take effects and return effects
+  
 • can succeed (or run forever) but can't fail
 
 ---
 
--> ## Magic tricks <-
+-> ## Cool tricks <-
 
 *Retried*
 
-• exponential retry starting at 10 ms then cap at 10 seconds only 100 times and jittered
-• || will pick the minimum value
-• && applies if both schedules continues
+• exponential retry starting at 10 ms
+  then cap at 10 seconds 
+  only 100 times
+  and jittered
+  
+• `||` will pick the minimum value
+
+• `&&` applies if both schedules continues
 
 ---
 
--> ## Magic tricks <-
+-> ## Cool tricks <-
 
 *Load testing*
 
-• foreachPar executes in parallel all item in a List
-• httpGet could be enriched with retry policy, timeouts...
+• foreachPar executes in parallel
+  all item in a List
+  
+• httpGet could be enriched
+  with retry policy, timeouts...
 
 ---
--> ## Magic tricks <-
+-> ## Cool tricks <-
 
 *flip*
 
-• flip : ZIO[R, E, A] => ZIO[R, A, E]
-• mapError as the dual as map
-• eventually as the dual as forever
-• fallbackPlan: executing specify fallback depending on error
+• `ZIO[R, E, A]` → `ZIO[R, A, E]`
+
+• `mapError` as the dual as `map`
+
+• `eventually` as the dual as `forever`
+
+• `fallbackPlan`: executing specify fallback
+   depending on error
 
 ---
