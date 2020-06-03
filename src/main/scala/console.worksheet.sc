@@ -13,7 +13,7 @@ def prettyType[T: TypeTag](
 sealed trait Console {
 
   // <- Compose ********************************************
- 
+
   def +(that: Console): Console = Sequence(this, that)
 
   // ->

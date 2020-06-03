@@ -12,9 +12,9 @@ import zio._
 import zio.Schedule._
 import zio.duration._
 
-// <- Magic Tricks ************************************************
+// <- Cool Tricks ******************************************
 
-// <- Fallback ************************************************
+// <- Fallback *********************************************
 
 // reminder
 // type UIO[+A]  = ZIO[Any, Nothing, A]
@@ -22,16 +22,16 @@ import zio.duration._
 
 type Data = String
 
-def getFromCache(value: String): Task[Data]
-def getFromDatabase(value: String): Task[Data]
-def getFromConfig(value: String): UIO[Data]
+def getFromCache(value: String): Task[Data] = ???
+def getFromDatabase(value: String): Task[Data] = ???
+def getFromConfig(value: String): UIO[Data] = ???
 
 def getFromAll(value: String): UIO[Data] =
   getFromCache(value) orElse getFromDatabase(value) orElse getFromConfig(value)
 
 // ->
 
-// <- Forever ************************************************
+// <- Forever **********************************************
 
 // *> (or zipRight) is flatMap but ignore input value
 
@@ -40,29 +40,29 @@ def forever[R, E](zio: ZIO[R, E, Any]): ZIO[R, E, Nothing] =
 
 // ->
 
-// <- Eventually ************************************************
+// <- Eventually *******************************************
 
-def eventually[R, A](zio: ZIO[R, Any, A]): ZIO[R, Nothing, A] =
-  zio orElse eventually(zio)
+def eventually_[R, A](zio: ZIO[R, Any, A]): ZIO[R, Nothing, A] =
+  zio orElse eventually_(zio)
 
 // ->
 
-// <- Retried ************************************************
+// <- Retried **********************************************
 
 type Response = String
 
 def httpGet(url: String): Task[Response] = ???
 
-def retryPolicy[E]: Schedule[ZEnv, E, E] =
+def retryPolicy: Schedule[ZEnv, Any, Any] =
   (Schedule.exponential(10.millis) || spaced(10.seconds)) &&
-    recurs(100).jittered
+    recurs(100).jittered(min = 0, max = 1)
 
-def httpGetWithRetry(url: String): Task[Response] =
-  httpGet(url) retry retryPolicy[Throwable]
+def httpGetWithRetry(url: String): RIO[ZEnv, Response] =
+  httpGet(url) retry retryPolicy
 
 // ->
 
-// <- Load tester ************************************************
+// <- Load tester ******************************************
 
 def loadTester(
   url: String,
@@ -79,7 +79,7 @@ def loadTester(
 
 // ->
 
-// <- flip ************************************************
+// <- flip *************************************************
 
 def mapError[R, E, E1, A](zio: ZIO[R, E, A])(f: E => E1): ZIO[R, E1, A] =
   zio.flip.map(f).flip

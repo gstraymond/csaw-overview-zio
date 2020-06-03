@@ -18,10 +18,9 @@
 
 • Not referentially transparent
 
-• Limited
+• Error Management by throwing exception
 
-TO BE COMPLETED
-=================
+• Use of implicits for `ExecutionContext`
 
 ---
 

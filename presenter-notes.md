@@ -8,16 +8,6 @@
 
 ## What is ZIO / origins
 
-- talk about FP ecosystem
-
-  - cats/scalaz
-- was part of ScalaZ effect library
-- state of effects library
-
-  - cats-effects
-  - monix
-  - ...
-
 - respects FP fundamentals
   - ref transp
   - immutability
@@ -154,8 +144,6 @@ interrupt/join by the runtime system
 parallelism: interrupt others if one fails
 
 ## ZIO: stream
-
-
 
 ## ZIO: Bracket/Managed
 

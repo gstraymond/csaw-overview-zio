@@ -8,9 +8,9 @@ def prettyType[T: TypeTag](
 
 // ->
 
-// <- Variance and bounds ************************************************
+// <- Variance and bounds **********************************
 
-// <- Covariance and lower bound ************************************************
+// <- Covariance and lower bound ***************************
 
 sealed trait Animal extends Product with Serializable
 case object Dog extends Animal
@@ -33,7 +33,7 @@ prettyType(animals)
 
 // ->
 
-// <- Contravariance and upper bound ************************************************
+// <- Contravariance and upper bound ***********************
 
 // → A is contravariant
 // if A2 is a subtype of A1, Module[A1] is a subtype of Module[A2]

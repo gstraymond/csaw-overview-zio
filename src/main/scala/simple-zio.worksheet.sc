@@ -104,7 +104,7 @@ object ZIO {
 
 // ->
 
-// <- ZIO: samples ******************************************
+// <- ZIO: samples *****************************************
 
 val hello = ZIO.succeed("hello")
 
@@ -134,4 +134,5 @@ prettyType(res)
 val modules = new Module1 with Module2 { val x1 = "foo"; val x2 = 42 }
 
 ZIO.unsafeRun(res, modules)
+
 // ->
