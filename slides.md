@@ -1,4 +1,4 @@
-%title: Scala ZIO, the future of Future[A]
+%title: ZIO, the future of Future[A]
 
 -> ## Agenda <-
 

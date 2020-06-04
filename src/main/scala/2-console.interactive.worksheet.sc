@@ -49,7 +49,7 @@ def run[A](console: Console[A]): A =
     case Print(line, console) => print(line); run(console)
     // we can't use StdIn in a worksheet
     //case Read(read) => run(read(StdIn.readLine))
-    // returning some random characters
+    // returning some random characters instead
     case Read(read) => run(read(Random.alphanumeric.take(5).mkString))
   }
 
