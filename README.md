@@ -1,6 +1,6 @@
 # ZIO, the future of Future[A]
 
-1 hour presentation for an overview of the ZIO framework
+1 hour presentation for an overview of the ZIO framework, follow-up to [Intro to FP with Scala](https://github.com/gstraymond/csaw-intro-fp-scala/)
 
 Inspired from theses presentations:
 
