@@ -2,6 +2,12 @@
 
 1 hour presentation for an overview of the ZIO framework
 
+Inspired from theses presentations:
+
+- [John A  De Goes - ZIO: Next-Generation Effects in Scala](https://www.youtube.com/watch?v=mkSHhsJXjdc)
+- [Magic Tricks with Functional Effects by John A. De Goes](https://www.youtube.com/watch?v=xpz4rf1RS8c)
+
+
 ## Slides
 
 [slides.md](slides.md)
