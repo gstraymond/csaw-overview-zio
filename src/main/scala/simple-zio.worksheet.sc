@@ -131,7 +131,7 @@ val res = for {
 
 prettyType(res)
 
-val modules = new Module1 with Module2 { val x1 = "foo"; val x2 = 42 }
+val modules = new Module1 with Module2 { val x1 = "foo"; val x2 = 101 }
 
 ZIO.unsafeRun(res, modules)
 

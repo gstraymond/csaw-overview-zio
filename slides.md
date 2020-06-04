@@ -10,11 +10,13 @@
 
 • ZIO async
 
-• cool tricks with ZIO
+• Cool tricks with ZIO
 
 ---
 
 -> ## Future[A] <-
+
+• Part of Scala std lib
 
 • Not referentially transparent
 
@@ -56,11 +58,23 @@
 
 • `Return(value: A)`
 
-• `Print(line: String, console: Candonsole[A])
+• `Print(line: String, console: Console[A])
 
 • `Read(f: String => Console[A])`
 
 • Interpreter
+
+---
+
+-> ## Scala Type Hierarchy <-
+
+• `Any` - supertype of all types
+  • `equals`
+  • `toString`
+
+• `Nothing` - subtype of all types
+  • means non-termination (thrown exception,
+  infinite loop…)
 
 ---
 
@@ -202,6 +216,7 @@ Can represent
   with retry policy, timeouts...
 
 ---
+
 -> ## Cool tricks <-
 
 *flip*
@@ -215,4 +230,3 @@ Can represent
 • `fallbackPlan`: executing specify fallback
    depending on error
 
----
